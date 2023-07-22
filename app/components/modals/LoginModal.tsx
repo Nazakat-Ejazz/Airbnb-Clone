@@ -35,14 +35,11 @@ const LoginModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    console.log("Inside onSubmit!");
     signIn("credentials", {
       ...data,
       redirect: false,
     }).then((callback) => {
       setIsLoading(false);
-
-      console.log("Inside callback!");
 
       if (callback?.ok) {
         toast.success("Success: User logged in.");
