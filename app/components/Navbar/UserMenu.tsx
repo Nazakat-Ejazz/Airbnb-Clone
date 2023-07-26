@@ -5,7 +5,7 @@ import { AiOutlineMenu, AiOutlineHome, AiOutlineUserAdd } from "react-icons/ai";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { TbBuildingPavilion } from "react-icons/tb";
 import { IoMdLogIn } from "react-icons/io";
-import { BiLogOutCircle, BiUserPlus } from "react-icons/bi";
+import { BiLogOutCircle, BiUserPlus, BiBookAdd } from "react-icons/bi";
 import { BsAirplaneEngines } from "react-icons/bs";
 
 import { signOut } from "next-auth/react";
@@ -17,6 +17,7 @@ import useLoginModal from "@/app/hooks/useLoginModal";
 
 import { SafeUser } from "@/app/types";
 import useRentModal from "@/app/hooks/useRentModal";
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -27,6 +28,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal();
+  const router = useRouter();
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
@@ -71,25 +73,46 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
               <>
                 <MenuItem
                   label="My Trips"
-                  onClick={() => {}}
+                  onClick={() => {
+                    router.push("/trips");
+                    toggleOpen();
+                  }}
                   Icon={BsAirplaneEngines}
                 />
 
                 <MenuItem
                   label="My Favorites"
-                  onClick={() => {}}
+                  onClick={() => {
+                    router.push("/favorites");
+                    toggleOpen();
+                  }}
                   Icon={MdOutlineFavoriteBorder}
                 />
 
                 <MenuItem
+                  label="My Reservations"
+                  onClick={() => {
+                    router.push("/reservations");
+                    toggleOpen();
+                  }}
+                  Icon={BiBookAdd}
+                />
+
+                <MenuItem
                   label="My Properties"
-                  onClick={() => {}}
+                  onClick={() => {
+                    router.push("/properties");
+                    toggleOpen();
+                  }}
                   Icon={TbBuildingPavilion}
                 />
 
                 <MenuItem
                   label="Airbnb My Home"
-                  onClick={rentModal.onOpen}
+                  onClick={() => {
+                    rentModal.onOpen();
+                    toggleOpen();
+                  }}
                   Icon={AiOutlineHome}
                 />
 

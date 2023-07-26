@@ -42,14 +42,16 @@ const LoginModal = () => {
       setIsLoading(false);
 
       if (callback?.ok) {
-        toast.success("Success: User logged in.");
-        console.log("Inside callback success!");
+        toast.success("Success: User logged in.", {
+          duration: 4000,
+          position: "top-right",
+        });
         router.refresh();
         loginModal.onClose();
       }
 
       if (callback?.error) {
-        toast.error(callback.error);
+        toast.error(callback.error, { duration: 4000, position: "top-right" });
       }
     });
   };
