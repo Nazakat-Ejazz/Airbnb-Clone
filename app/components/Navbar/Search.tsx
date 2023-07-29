@@ -34,6 +34,7 @@ const Search = () => {
 
       return `${diff} Days`;
     }
+    return "Any Week";
   }, [startDate, endDate]);
 
   const guestLabel = useMemo(() => {
